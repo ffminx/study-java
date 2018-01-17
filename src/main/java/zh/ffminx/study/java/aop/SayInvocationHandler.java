@@ -20,6 +20,7 @@ public class SayInvocationHandler implements InvocationHandler {
     
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        //        System.out.println(proxy.toString()); // stack over flow !!!
         System.out.println("before");
         Object result = method.invoke(targetObject, args);
         System.out.println("after");

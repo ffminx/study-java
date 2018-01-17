@@ -11,4 +11,8 @@ public class CglibTarget implements Say {
         System.out.println("this is target");
     }
     
+    @Override
+    public String toString() {
+        return "this is toString()";
+    }
 }
