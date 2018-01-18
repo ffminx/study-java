@@ -2,9 +2,12 @@ package zh.ffminx.study.java.io;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
+import java.nio.channels.SocketChannel;
+import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -26,7 +29,14 @@ public class NioServer {
                 int select = selector.select();
                 if (select > 0) {
                     Set<SelectionKey> selectionKeys = selector.selectedKeys();
-                    System.out.println(selectionKeys.toString());
+                    Iterator<SelectionKey> iterator = selectionKeys.iterator();
+                    while (iterator.hasNext()) {
+                        SelectionKey next = iterator.next();
+                        if (next.isAcceptable()) {
+                            SocketChannel socketChannel = ((ServerSocketChannel) next.channel()).accept();
+                            socketChannel.register(next.selector(), SelectionKey.OP_READ, ByteBuffer.allocate(1024));
+                        }
+                    }
                 }
                 Thread.sleep(1000 * 5);
             }

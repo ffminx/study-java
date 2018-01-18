@@ -48,21 +48,54 @@ public class Sort {
             return;
         }
         for (int i = 1; i < array.length; i++) {
-            insertSort(array, i);
+            int key = array[i];
+            int j;
+            for (j = i - 1; j >= 0; j--) {
+                if (array[j] > key) {
+                    array[j + 1] = array[j];
+                } else {
+                    break;
+                }
+            }
+            array[j + 1] = key;
         }
     }
     
-    private void insertSort(int[] array, int index) {
-        int key = array[index];
-        int i;
-        for (i = index - 1; i >= 0; i--) {
-            if (array[i] > key) {
-                array[i + 1] = array[i];
-            } else {
-                break;
-            }
+    private void shellSort(int[] array) {
+        if (array == null || array.length <= 1) {
+            return;
         }
-        array[i + 1] = key;
+        int gap = array.length >> 1;
+        while (gap > 0) {
+            for (int i = 1; i < array.length; i++) {
+                int key = array[i];
+                int j;
+                for (j = i; j > gap; j -= gap) {
+                    if (array[j - gap] > key) {
+                        array[j] = array[j - gap];
+                    } else {
+                        break;
+                    }
+                }
+                array[j + gap] = key;
+            }
+            gap = gap >> 1;
+        }
+        
+        //        if(arr == null || arr.length <= 1) return;
+        //        int gap=arr.length/2;
+        //        while(gap>0){
+        //            for(int i=1;i<arr.length ;i++){
+        //                int temp=arr[i];
+        //                int p=i;
+        //                while(p>=gap&&arr[p-gap]>temp){
+        //                    arr[p]=arr[p-gap];
+        //                    p-=gap;
+        //                }
+        //                arr[p]=temp;
+        //            }
+        //            gap/=2;
+        //        }
     }
     
     /**
@@ -116,8 +149,9 @@ public class Sort {
         Sort sort = new Sort();
         //        sort.fastSort(array, 0, size - 1);
         //        sort.insertSort(array);
+        sort.shellSort(array);
         //        sort.selectSort(array);
-        sort.heapSort(array);
+        //        sort.heapSort(array);
         System.out.println(Arrays.toString(array));
     }
     

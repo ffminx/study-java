@@ -7,10 +7,10 @@ package zh.ffminx.study.java.base;
 public class BaseTest {
     
     public static void main(String[] args) {
-        long a = 23;
-        
-        float[] b = new float[1];
-        b[0] = 23.0f;
-        System.out.println(a==b[0]);
+        int i = -8;
+        System.out.println(i >>> 1);
+        System.out.println(i << 1);
+        double d = 0.5;
+        System.out.println(d);
     }
 }
