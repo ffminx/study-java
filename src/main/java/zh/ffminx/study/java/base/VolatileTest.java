@@ -1,4 +1,4 @@
-package zh.ffminx.study.java.collection;
+package zh.ffminx.study.java.base;
 
 /**
  * @author fengmin.xu E-mail: fengmin.xu@56qq.com

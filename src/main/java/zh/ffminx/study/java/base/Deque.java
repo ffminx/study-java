@@ -10,7 +10,7 @@ public class Deque {
     
     public static void main(String args[]) {
         java.util.Deque<Integer> q = new ArrayDeque<>();
-        //        Deque<Integer> q = new LinkedList<>();
+        //        Deque<Integer> q = new LinkedListTest<>();
         long begin = System.nanoTime();
         test(q);
         long end = System.nanoTime();
