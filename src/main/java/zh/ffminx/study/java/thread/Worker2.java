@@ -33,7 +33,8 @@ public class Worker2 implements Runnable {
         System.out.println("worker:" + workName + " complete project 1");
         
         try {
-            barrier.await();
+            int await = barrier.await();
+            System.out.println("worker: " + workName + " await: " + await);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (BrokenBarrierException e) {

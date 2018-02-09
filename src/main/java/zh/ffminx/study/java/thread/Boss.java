@@ -6,7 +6,18 @@ import java.util.concurrent.CountDownLatch;
  * @author fengmin.xu E-mail: fengmin.xu@56qq.com
  * @since 2018-01-24 16:18
  */
-public class Boss {
+public class Boss implements Runnable {
+    
+    
+    private CountDownLatch countDownLatch;
+    
+    private String bossName;
+    
+    public Boss(CountDownLatch countDownLatch) {
+        this.countDownLatch = countDownLatch;
+    }
+    
+    
     
     public static void main(String[] args) throws InterruptedException {
         int workerCount = 3;
@@ -18,9 +29,24 @@ public class Boss {
         new Thread(worker11).start();
         new Thread(worker12).start();
         new Thread(worker13).start();
-        
-        latch.await();
-        System.out.println("all worker complete work, boss begin checking");
+    
+        Boss boss1 = new Boss(latch);
+        Boss boss2 = new Boss(latch);
+    
+        new Thread(boss1).start();
+        new Thread(boss2).start();
+    }
+    
+    @Override
+    public void run() {
+        this.bossName = Thread.currentThread().toString();
+        System.out.println("boss:" + this.bossName + " wait...");
+        try {
+            countDownLatch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("boss:" + this.bossName + " continue");
     }
     
 }
